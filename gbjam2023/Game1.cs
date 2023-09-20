@@ -14,6 +14,15 @@ public class Game1 : Game
     private int screenWidth = 160;
     private int screenHeight = 144;
     private int scaleSize = 5;
+    
+    // States
+    private State state;
+    
+    // list of states so I don't have to keep reloading data?
+    // States:
+    // 0 - Menu
+    // 1 - Credits
+    private State[] statelist = {new MenuState(), new CreditsState()};
 
 
     // disgusting test code, to be removed eventually
@@ -22,7 +31,7 @@ public class Game1 : Game
     private int updateX = 1;
 
     private Texture2D testbg;
-    
+
     public Game1()
     {
         // Creates the window that displays the actual game, but the graphics are first rendered
@@ -33,12 +42,14 @@ public class Game1 : Game
 
         // where graphics are initally rendered to
         _actualScreenRectangle = new Rectangle(0, 0, screenWidth * scaleSize, screenHeight * scaleSize);
-        
+
+        //Content = GlobalContentManager.Content;
         
         Content.RootDirectory = "Content";
         IsMouseVisible = true;
     }
 
+    // initialise and loadcontent are only called once
     protected override void Initialize()
     {
         // TODO: Add your initialization logic here
@@ -52,7 +63,7 @@ public class Game1 : Game
     {
         _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-        // TODO: use this.Content to load your game content here
+        // TODO: use this.Content to load your game content here - this method is called once at the beginning when the game starts
         
         // this is how you load any file, no need for the file type at the end, make sure you've loaded 
         // it into MGCB first :)
