@@ -4,19 +4,20 @@ using Microsoft.Xna.Framework.Graphics;
 namespace gbjam2023;
 
 public abstract class State {
-    //protected ContentManager Content;
     protected Texture2D bg_texture;
-    //protected SpriteBatch _spriteBatch;
-
     public DependencyContainer dependents;
 
-    public State(DependencyContainer _d) {
+    public Button[] buttons;
+
+    protected State(DependencyContainer _d) {
         dependents = _d;
     }
 
     //public abstract void Initialise();
     //public abstract void LoadContent();
     public abstract void Update(GameTime _gt);
+
+    public abstract void drawUI();
     public abstract void Draw(GameTime _gt);
 
     public Texture2D GetBackground() {

@@ -8,8 +8,9 @@ public static class MathsUtil {
 }
     
 public class DependencyContainer {
-    public readonly ContentManager _content;
+    private readonly ContentManager _content;
     public readonly SpriteBatch _spriteBatch;
+    public bool exitgame = false;
     public DependencyContainer(ContentManager _c, SpriteBatch _sp) {
         _content = _c;
         _spriteBatch = _sp;
@@ -18,5 +19,4 @@ public class DependencyContainer {
     public Texture2D LoadTexture2D(string filename) {
         return _content.Load<Texture2D>(filename);
     }
-    
 }

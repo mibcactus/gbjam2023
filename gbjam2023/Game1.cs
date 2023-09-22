@@ -1,13 +1,11 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
 namespace gbjam2023;
 
-public class Game1 : Game
-{
+public class Game1 : Game {
     private GraphicsDeviceManager _graphics;
     private RenderTarget2D _nativeRenderTarget;
     private SpriteBatch _spriteBatch;
@@ -34,6 +32,7 @@ public class Game1 : Game
     private int updateX = 1;
 
     private Texture2D testbg;
+
 
     public Game1()
     {
@@ -89,12 +88,17 @@ public class Game1 : Game
         testbg = Content.Load<Texture2D>("testbg");
     }
 
-    protected override void Update(GameTime gameTime)
-    {
-        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+    protected override void Update(GameTime gameTime) {
+        if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) {
+            _dependencyContainer.exitgame = true;
+        }
+        
+        if(_dependencyContainer.exitgame) {
             Exit();
+        }
 
         // TODO: Add your update logic here
+        
         testposition.X += updateX;
         if(testposition.X >= screenWidth - testsmile.Width) {
             updateX = -1;
