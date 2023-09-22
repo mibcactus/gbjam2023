@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -75,9 +76,10 @@ public class Game1 : Game
         // see declaration of statelist to see what each index should be
         // causes game to crash if uncommented rn, probably due to being unfinished
         //statelist = new State[] {new MenuState(_dependencyContainer), new CreditsState(_dependencyContainer)};
-        Console.WriteLine("Constructing states");
+        
+        Debug.WriteLine("Constructing states");
         statelist = new State[] {new CreditsState(_dependencyContainer) };
-        Console.WriteLine("States constructed");
+        Debug.WriteLine("States constructed");
         
         // change this once states are implemented
         // state = statelist[0];
