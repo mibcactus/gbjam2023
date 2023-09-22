@@ -1,18 +1,14 @@
-﻿using Microsoft.Xna.Framework.Content;
+﻿using System;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace gbjam2023; 
 
 public class CreditsState : MenuState {
-    public CreditsState(ContentManager _c) : base(_c) {
-        SetBackground(Content.Load<Texture2D>("credits_bg"));
+    public CreditsState(DependencyContainer _d) : base(_d) {
+        Console.WriteLine("Constructing credits state");
+        //SetBackground(dependents.LoadTexture2D("credits_bg"));
+        //SetBackground(dependents._content.Load<Texture2D>("test_bg"));
+        Console.WriteLine("Background set successfully");
     }
-
-    public override void Update() {
-        base.Update();
-    }
-
-    public override void Draw() {
-        base.Draw();
-    }
+    
 }

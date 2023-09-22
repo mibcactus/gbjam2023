@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
@@ -10,6 +11,7 @@ public class Game1 : Game
     private RenderTarget2D _nativeRenderTarget;
     private SpriteBatch _spriteBatch;
     private Rectangle _actualScreenRectangle;
+    private DependencyContainer _dependencyContainer;
     
     private int screenWidth = 160;
     private int screenHeight = 144;
@@ -22,8 +24,8 @@ public class Game1 : Game
     // States:
     // 0 - Menu
     // 1 - Credits
-    private State[] statelist = {new MenuState(), new CreditsState()};
-
+    private State[] statelist;
+    
 
     // disgusting test code, to be removed eventually
     private Texture2D testsmile;
@@ -44,8 +46,8 @@ public class Game1 : Game
         _actualScreenRectangle = new Rectangle(0, 0, screenWidth * scaleSize, screenHeight * scaleSize);
 
         //Content = GlobalContentManager.Content;
-        
         Content.RootDirectory = "Content";
+
         IsMouseVisible = true;
     }
 
@@ -67,7 +69,21 @@ public class Game1 : Game
         
         // this is how you load any file, no need for the file type at the end, make sure you've loaded 
         // it into MGCB first :)
-        testsmile = Content.Load<Texture2D>("testsmile");
+        
+        _dependencyContainer = new DependencyContainer(Content, _spriteBatch);
+
+        // see declaration of statelist to see what each index should be
+        // causes game to crash if uncommented rn, probably due to being unfinished
+        //statelist = new State[] {new MenuState(_dependencyContainer), new CreditsState(_dependencyContainer)};
+        Console.WriteLine("Constructing states");
+        statelist = new State[] {new CreditsState(_dependencyContainer) };
+        Console.WriteLine("States constructed");
+        
+        // change this once states are implemented
+        // state = statelist[0];
+        
+        //testsmile = Content.Load<Texture2D>("testsmile");
+        testsmile = _dependencyContainer.LoadTexture2D("testsmile");
         testbg = Content.Load<Texture2D>("testbg");
     }
 
@@ -83,6 +99,10 @@ public class Game1 : Game
         } else if (testposition.X <= 0) {
             updateX = 1;
         }
+        
+        // TODO: implement state updates
+        //state.Update(gameTime);
+        
 
         base.Update(gameTime);
     }
@@ -95,11 +115,14 @@ public class Game1 : Game
         // TODO: Add your drawing code here
         
         // have to draw sprites in batches otherwise it crashes
-        // otherwise drawn in order specififed
+        // otherwise drawn in order specified
         _spriteBatch.Begin();
         _spriteBatch.Draw(testbg, Vector2.Zero, Color.White);
         _spriteBatch.Draw(testsmile, testposition, Color.White);
         _spriteBatch.End();
+        
+        // TODO: implement state drawing
+        //state.Draw(gameTime);
         
         base.Draw(gameTime);
         
