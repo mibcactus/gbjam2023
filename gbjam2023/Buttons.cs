@@ -20,16 +20,16 @@ public abstract class Button : Entity {
     public bool isSelected() {
         return selected;
     }
-/*
-    protected void ButtonAction() {
-        dependant.updateState(new_state);
-    }*/
 
-    protected abstract void ButtonAction();
+    protected virtual void ButtonAction() {
+        dependant.updateState(new_state_ID);
+    }
+
 
     public override void Update() {
         if (pressed) {
             ButtonAction();
+            this.pressed = false; //releases the button once done
         }
     }
 
@@ -53,6 +53,12 @@ public class nextButton : Button{
     }
 }
 
+public class menuButton : Button {
+    public menuButton(Vector2 _p, DependencyContainer _dc) : base(_p, _dc.LoadTexture2D("menu_button_A"), 0, _dc) {
+        selected_texture = dependant.LoadTexture2D("menu_button_B");
+    }
+}
+
 public class exitButton : Button {
     public exitButton(Vector2 _p, DependencyContainer _dc) : base(_p, _dc.LoadTexture2D("exit_button_A"), 0, _dc) {
         selected_texture = dependant.LoadTexture2D("exit_button_B");
@@ -71,5 +77,6 @@ public class creditsButton : Button {
     }
 
     protected override void ButtonAction() {
+        dependant.updateState(1); //1 is for credits
     }
 }

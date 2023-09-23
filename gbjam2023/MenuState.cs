@@ -17,8 +17,8 @@ public class MenuState : State {
     public MenuState(DependencyContainer _d) : base(_d) {
         SetBackground(dependents.LoadTexture2D("menu_bg"));
         buttons_list = new Button[] {
-            new creditsButton(new Vector2(50, 104), dependents),
-            new    exitButton(new Vector2(50, 124), dependents)
+            new creditsButton(new Vector2(20, 124), dependents),
+            new    exitButton(new Vector2(84, 124), dependents)
         };
         selected_button = 0;
         testsmile = dependents.LoadTexture2D("testsmile");
@@ -36,36 +36,12 @@ public class MenuState : State {
             }
         }
 
-        if (Keyboard.GetState().IsKeyDown(Keys.E)) {
-            buttons_list[selected_button].pressed = true;
-        } else if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.W)) {
-            buttons_list[selected_button].selected = false;
-            if (selected_button >= buttons_list.Length - 1) {
-                selected_button = 0;
-            }
-            else {
-                selected_button++;
-            }
-            buttons_list[selected_button].selected = true;
-        } else if (Keyboard.GetState().IsKeyDown(Keys.D) || Keyboard.GetState().IsKeyDown(Keys.S)) {
-            buttons_list[selected_button].selected = false;
-            if (selected_button == 0) {
-                selected_button = buttons_list.Length;
-            }
-            selected_button--; 
-            buttons_list[selected_button].selected = true;
-        }
-
-        foreach (var button in buttons_list) {
-            button.Update();
-        }
+        base.Update(_gt);
         
     }
 
     public override void drawUI() {
-        foreach (var button in buttons_list) {
-            button.Draw();
-        }
+        base.drawUI();
     }
 
     public override void Draw(GameTime _gt) {

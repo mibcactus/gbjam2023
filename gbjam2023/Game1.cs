@@ -94,6 +94,7 @@ public class Game1 : Game {
         // TODO: Add your update logic here
         if (_dependencyContainer.state_changed) {
             state = statelist[_dependencyContainer.new_state_ID];
+            _dependencyContainer.state_changed = false;
         }
      
         // TODO: implement state updates
@@ -103,8 +104,7 @@ public class Game1 : Game {
         base.Update(gameTime);
     }
 
-    protected override void Draw(GameTime gameTime)
-    {
+    protected override void Draw(GameTime gameTime) {
         GraphicsDevice.SetRenderTarget(_nativeRenderTarget);
         GraphicsDevice.Clear(Color.CornflowerBlue);
 
