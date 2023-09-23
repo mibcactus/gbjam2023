@@ -40,7 +40,7 @@ public class MenuState : State {
             buttons_list[selected_button].pressed = true;
         } else if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.W)) {
             buttons_list[selected_button].selected = false;
-            if (selected_button == buttons_list.Length) {
+            if (selected_button == buttons_list.Length - 1) {
                 selected_button = 0;
             }
             else {
@@ -52,9 +52,7 @@ public class MenuState : State {
             if (selected_button == 0) {
                 selected_button = buttons_list.Length;
             }
-            else {
-                selected_button--;
-            }
+            selected_button--; 
             buttons_list[selected_button].selected = true;
         }
 
