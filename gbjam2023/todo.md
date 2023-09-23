@@ -13,8 +13,8 @@
 - [ ] buttons:
 - [x] next button A
 - [x] next button B
-- [ ] credits button A
-- [ ] credits button B
+- [x] credits button A
+- [x] credits button B
 - [x] menu button A
 - [x] menu button B
 - [x] exit button A

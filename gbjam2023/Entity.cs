@@ -56,36 +56,3 @@ public abstract class Entity {
 }
 
 
-public abstract class Button : Entity {
-    protected State new_state;
-    protected Texture2D selected_texture;
-    protected bool selected = false;
-
-    // TODO: Finish button constructor
-    protected Button(Vector2 _p, Texture2D _t, State _newState , DependencyContainer _dc) : base(_p, _t, _dc) {
-        new_state = _newState;
-    }
-
-    public void SetSelected(bool is_selected) {
-        selected = is_selected;
-    }
-
-    public bool isSelected() {
-        return selected;
-    }
-
-    protected abstract void ButtonAction();
-
-    public override void Update() { }
-
-    public override void Draw() {
-        Texture2D t;
-        if (selected) {
-            t = selected_texture;
-        } else {
-            t = texture;
-        }
-        
-        dependant._spriteBatch.Draw(t, position, Color.White);
-    }
-}

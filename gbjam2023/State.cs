@@ -7,7 +7,8 @@ public abstract class State {
     protected Texture2D bg_texture;
     public DependencyContainer dependents;
 
-    public Button[] buttons;
+    public Button[] buttons_list;
+    public int selected_button = 0;
 
     protected State(DependencyContainer _d) {
         dependents = _d;

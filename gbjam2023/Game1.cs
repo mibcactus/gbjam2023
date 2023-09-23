@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -17,21 +18,13 @@ public class Game1 : Game {
     private int scaleSize = 5;
     
     // States
-    private State state;
+    private State state; // moving this to dc?
     
     // list of states so I don't have to keep reloading data?
     // States:
     // 0 - Menu
     // 1 - Credits
     private State[] statelist;
-    
-
-    // disgusting test code, to be removed eventually
-    private Texture2D testsmile;
-    private Vector2 testposition;
-    private int updateX = 1;
-
-    private Texture2D testbg;
 
 
     public Game1()
@@ -48,6 +41,9 @@ public class Game1 : Game {
         //Content = GlobalContentManager.Content;
         Content.RootDirectory = "Content";
 
+        IsFixedTimeStep = true;
+        TargetElapsedTime = TimeSpan.FromSeconds(1d/60d);
+        
         IsMouseVisible = true;
     }
 
@@ -73,19 +69,12 @@ public class Game1 : Game {
         _dependencyContainer = new DependencyContainer(Content, _spriteBatch);
 
         // see declaration of statelist to see what each index should be
-        // causes game to crash if uncommented rn, probably due to being unfinished
         //statelist = new State[] {new MenuState(_dependencyContainer), new CreditsState(_dependencyContainer)};
         
-        Debug.WriteLine("Constructing states");
-        statelist = new State[] {new MenuState(_dependencyContainer) };
-        Debug.WriteLine("States constructed");
+        statelist = new State[] {new MenuState(_dependencyContainer), new CreditsState(_dependencyContainer) };
         
         // change this once states are implemented
          state = statelist[0];
-        
-        //testsmile = Content.Load<Texture2D>("testsmile");
-        //testsmile = _dependencyContainer.LoadTexture2D("testsmile");
-        //testbg = Content.Load<Texture2D>("testbg");
     }
 
     protected override void Update(GameTime gameTime) {
@@ -97,15 +86,16 @@ public class Game1 : Game {
             Exit();
         }
 
-        // TODO: Add your update logic here
         /*
-        testposition.X += updateX;
-        if(testposition.X >= screenWidth - testsmile.Width) {
-            updateX = -1;
-        } else if (testposition.X <= 0) {
-            updateX = 1;
+        if (_dependencyContainer.level_won) {
+            statelist[2] = new LevelState(_dependencyContainer);
         }*/
-        
+
+        // TODO: Add your update logic here
+        if (_dependencyContainer.state_changed) {
+            state = statelist[_dependencyContainer.new_state_ID];
+        }
+     
         // TODO: implement state updates
         state.Update(gameTime);
         
