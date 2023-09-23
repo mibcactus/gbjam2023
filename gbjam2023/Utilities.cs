@@ -10,7 +10,7 @@ public static class MathsUtil {
 public class DependencyContainer {
     private readonly ContentManager _content;
     public readonly SpriteBatch _spriteBatch;
-    public bool exitgame = false;
+    public bool exit_game = false;
     
     public bool state_changed = false;
     public bool level_won = false;

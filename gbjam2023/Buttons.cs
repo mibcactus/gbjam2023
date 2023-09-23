@@ -25,7 +25,7 @@ public abstract class Button : Entity {
         dependant.updateState(new_state);
     }*/
 
-    protected void ButtonAction(){}
+    protected abstract void ButtonAction();
 
     public override void Update() {
         if (pressed) {
@@ -48,6 +48,9 @@ public class nextButton : Button{
         : base(_p, _dc.LoadTexture2D("next_button_A"), _newState, _dc) {
         selected_texture = dependant.LoadTexture2D("next_button_B");
     }
+
+    protected override void ButtonAction() {
+    }
 }
 
 public class exitButton : Button {
@@ -55,8 +58,8 @@ public class exitButton : Button {
         selected_texture = dependant.LoadTexture2D("exit_button_B");
     }
 
-    protected new void ButtonAction() {
-        dependant.exitgame = true;
+    protected override void ButtonAction() {
+        dependant.exit_game = true;
     }
 }
 
@@ -65,5 +68,8 @@ public class creditsButton : Button {
     public creditsButton(Vector2 _p, DependencyContainer _dc) 
         : base(_p, _dc.LoadTexture2D("credits_button_A"), 1, _dc) {
         selected_texture = dependant.LoadTexture2D("credits_button_B");
+    }
+
+    protected override void ButtonAction() {
     }
 }

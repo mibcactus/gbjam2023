@@ -74,15 +74,15 @@ public class Game1 : Game {
         statelist = new State[] {new MenuState(_dependencyContainer), new CreditsState(_dependencyContainer) };
         
         // change this once states are implemented
-         state = statelist[0];
+        state = statelist[0];
     }
 
     protected override void Update(GameTime gameTime) {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape)) {
-            _dependencyContainer.exitgame = true;
+            _dependencyContainer.exit_game = true;
         }
         
-        if(_dependencyContainer.exitgame) {
+        if(_dependencyContainer.exit_game) {
             Exit();
         }
 

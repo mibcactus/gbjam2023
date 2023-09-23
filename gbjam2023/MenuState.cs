@@ -17,10 +17,10 @@ public class MenuState : State {
     public MenuState(DependencyContainer _d) : base(_d) {
         SetBackground(dependents.LoadTexture2D("menu_bg"));
         buttons_list = new Button[] {
-            new    exitButton(new Vector2(50, 124), dependents), 
-            new creditsButton(new Vector2(50, 104), dependents)
+            new creditsButton(new Vector2(50, 104), dependents),
+            new    exitButton(new Vector2(50, 124), dependents)
         };
-        selected_button = 1;
+        selected_button = 0;
         testsmile = dependents.LoadTexture2D("testsmile");
         testposition.Y = 80;
     }
@@ -36,11 +36,11 @@ public class MenuState : State {
             }
         }
 
-        if (Keyboard.GetState().IsKeyDown(Keys.Space)) {
+        if (Keyboard.GetState().IsKeyDown(Keys.E)) {
             buttons_list[selected_button].pressed = true;
         } else if (Keyboard.GetState().IsKeyDown(Keys.A) || Keyboard.GetState().IsKeyDown(Keys.W)) {
             buttons_list[selected_button].selected = false;
-            if (selected_button == buttons_list.Length - 1) {
+            if (selected_button >= buttons_list.Length - 1) {
                 selected_button = 0;
             }
             else {
@@ -56,6 +56,9 @@ public class MenuState : State {
             buttons_list[selected_button].selected = true;
         }
 
+        foreach (var button in buttons_list) {
+            button.Update();
+        }
         
     }
 
