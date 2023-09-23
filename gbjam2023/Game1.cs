@@ -77,15 +77,15 @@ public class Game1 : Game {
         //statelist = new State[] {new MenuState(_dependencyContainer), new CreditsState(_dependencyContainer)};
         
         Debug.WriteLine("Constructing states");
-        statelist = new State[] {new CreditsState(_dependencyContainer) };
+        statelist = new State[] {new MenuState(_dependencyContainer) };
         Debug.WriteLine("States constructed");
         
         // change this once states are implemented
-        // state = statelist[0];
+         state = statelist[0];
         
         //testsmile = Content.Load<Texture2D>("testsmile");
-        testsmile = _dependencyContainer.LoadTexture2D("testsmile");
-        testbg = Content.Load<Texture2D>("testbg");
+        //testsmile = _dependencyContainer.LoadTexture2D("testsmile");
+        //testbg = Content.Load<Texture2D>("testbg");
     }
 
     protected override void Update(GameTime gameTime) {
@@ -98,16 +98,16 @@ public class Game1 : Game {
         }
 
         // TODO: Add your update logic here
-        
+        /*
         testposition.X += updateX;
         if(testposition.X >= screenWidth - testsmile.Width) {
             updateX = -1;
         } else if (testposition.X <= 0) {
             updateX = 1;
-        }
+        }*/
         
         // TODO: implement state updates
-        //state.Update(gameTime);
+        state.Update(gameTime);
         
 
         base.Update(gameTime);
@@ -122,15 +122,18 @@ public class Game1 : Game {
         
         // have to draw sprites in batches otherwise it crashes
         // otherwise drawn in order specified
-        _spriteBatch.Begin();
+        _spriteBatch.Begin();/*
         _spriteBatch.Draw(testbg, Vector2.Zero, Color.White);
         _spriteBatch.Draw(testsmile, testposition, Color.White);
-        _spriteBatch.End();
+        _spriteBatch.End();*/
         
         // TODO: implement state drawing
-        //state.Draw(gameTime);
+        state.Draw(gameTime);
+        _spriteBatch.End();
+        
         
         base.Draw(gameTime);
+        
         
         
         

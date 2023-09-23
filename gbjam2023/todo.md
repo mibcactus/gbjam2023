@@ -9,7 +9,16 @@
 - [ ] Credits bg - "credits_bg"
 - [ ] Large bg - 160x3 width?
 - [ ] Find suitable font
-- [ ] Set palette gradient?
+- [ ] Decide on palette
+- [ ] buttons:
+- [x] next button A
+- [x] next button B
+- [ ] credits button A
+- [ ] credits button B
+- [x] menu button A
+- [x] menu button B
+- [x] exit button A
+- [x] exit button B
 
 ### Raycasting
 - [ ] Unpack an image

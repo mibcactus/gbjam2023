@@ -22,8 +22,8 @@ public class EntityDependenceContainer : IDependencyContainer {
 */
 
 public abstract class Entity {
-    private Vector2 position;     // top left corner of the entity
-    private Texture2D texture;    // default texture in case the animation doesn't load
+    protected Vector2 position;     // top left corner of the entity
+    protected Texture2D texture;    // default texture in case the animation doesn't load
     private Animation animation;  // what should ideally be drawn
     protected DependencyContainer dependant;
 
@@ -59,19 +59,33 @@ public abstract class Entity {
 public abstract class Button : Entity {
     protected State new_state;
     protected Texture2D selected_texture;
+    protected bool selected = false;
 
     // TODO: Finish button constructor
     protected Button(Vector2 _p, Texture2D _t, State _newState , DependencyContainer _dc) : base(_p, _t, _dc) {
         new_state = _newState;
     }
 
-    protected abstract void ButtonAction();
-
-    public override void Update() {
-        throw new NotImplementedException();
+    public void SetSelected(bool is_selected) {
+        selected = is_selected;
     }
 
+    public bool isSelected() {
+        return selected;
+    }
+
+    protected abstract void ButtonAction();
+
+    public override void Update() { }
+
     public override void Draw() {
-        throw new NotImplementedException();
+        Texture2D t;
+        if (selected) {
+            t = selected_texture;
+        } else {
+            t = texture;
+        }
+        
+        dependant._spriteBatch.Draw(t, position, Color.White);
     }
 }

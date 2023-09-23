@@ -14,8 +14,8 @@ public class nextButton : Button{
 }
 
 public class exitButton : Button {
-    public exitButton(Vector2 _p, DependencyContainer _dc)
-        : base(_p, _dc.LoadTexture2D("exit_button_A"), null, _dc) {
+    public exitButton(Vector2 _p, DependencyContainer _dc) : base(_p, _dc.LoadTexture2D("exit_button_A"), null, _dc) {
+        selected_texture = dependant.LoadTexture2D("exit_button_B");
     }
 
     protected override void ButtonAction() {
@@ -23,6 +23,7 @@ public class exitButton : Button {
     }
 }
 
+/*
 public class creditsButton : Button {
     public creditsButton(Vector2 _p, DependencyContainer _dc) 
         : base(_p, _dc.LoadTexture2D("credits_button_A"), new CreditsState(_dc), _dc) {
@@ -33,3 +34,4 @@ public class creditsButton : Button {
         throw new System.NotImplementedException();
     }
 }
+*/
